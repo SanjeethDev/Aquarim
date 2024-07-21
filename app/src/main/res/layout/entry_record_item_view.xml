@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/entry_record_item_liquid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintVertical_bias="0.015"
+        android:text="Water"
+        />
+
+    <TextView
+        android:id="@+id/entry_record_item_datetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/entry_record_item_liquid"
+        app:layout_constraintTop_toBottomOf="@id/entry_record_item_liquid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        android:text="YYYY-MM-DD HH:MM:SS"
+        />
+
+    <TextView
+        android:id="@+id/entry_record_item_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/entry_record_item_datetime"
+        app:layout_constraintTop_toTopOf="@id/entry_record_item_liquid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/entry_record_item_datetime"
+        app:layout_constraintHorizontal_bias="0.9"
+        android:text="500 ml"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
