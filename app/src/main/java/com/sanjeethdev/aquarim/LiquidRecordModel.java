@@ -2,30 +2,24 @@ package com.sanjeethdev.aquarim;
 
 import java.util.Date;
 
-public class EntryRecordModel {
+public class LiquidRecordModel
+{
     // All the data required for a record.
     // Record == Water intake information.
     private Date datetime;
     private int quantity;
     private String liquid;
-    private int size = 0;
-
 
     // Constructor
-    public EntryRecordModel(Date datetime, int quantity, String liquid) {
+    public LiquidRecordModel(Date datetime, int quantity, String liquid)
+    {
         this.datetime = datetime;
         this.quantity = quantity;
         this.liquid = liquid;
     }
 
     // Empty Constructor
-    public EntryRecordModel() {
-
-    }
-
-    public int getSize() {
-        return size;
-    }
+    public LiquidRecordModel() {}
 
     public String printRecord() {
         return liquid + " " + datetime + " " + quantity;
@@ -41,7 +35,8 @@ public class EntryRecordModel {
         this.datetime = datetime;
     }
 
-    public int getQuantity() {
+    public int getQuantity()
+    {
         return quantity;
     }
 

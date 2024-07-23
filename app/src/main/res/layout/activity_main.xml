@@ -38,10 +38,11 @@
         app:layout_constraintBottom_toBottomOf="@id/main_water_level"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/main_water_level" >
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/main_record_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
     </androidx.cardview.widget.CardView>
 
