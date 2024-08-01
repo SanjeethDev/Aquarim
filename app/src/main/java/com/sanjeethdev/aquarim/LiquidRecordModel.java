@@ -6,12 +6,12 @@ public class LiquidRecordModel
 {
     // All the data required for a record.
     // Record == Water intake information.
-    private Date datetime;
+    private long datetime;
     private int quantity;
     private String liquid;
 
     // Constructor
-    public LiquidRecordModel(Date datetime, int quantity, String liquid)
+    public LiquidRecordModel(long datetime, int quantity, String liquid)
     {
         this.datetime = datetime;
         this.quantity = quantity;
@@ -27,11 +27,11 @@ public class LiquidRecordModel
 
     // Getters and Setters.
     // Also used for sql data insert.
-    public Date getDatetime() {
+    public long getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(Date datetime) {
+    public void setDatetime(long datetime) {
         this.datetime = datetime;
     }
 

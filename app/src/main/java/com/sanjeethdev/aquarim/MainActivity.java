@@ -17,13 +17,14 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Test code to look at the data and views.
         ArrayList<LiquidRecordModel> data = new ArrayList<>();
         RecyclerView recycleEntryRecord = findViewById(R.id.main_record_view);
         recycleEntryRecord.setLayoutManager(new LinearLayoutManager(this));
-        data.add(new LiquidRecordModel(new Date(), 200, "Water"));
-        data.add(new LiquidRecordModel(new Date(), 400, "Water"));
-        data.add(new LiquidRecordModel(new Date(), 600, "Orange Juice"));
-        data.add(new LiquidRecordModel(new Date(), 800, "Water"));
+        data.add(new LiquidRecordModel(new Date().getTime(), 200, "Water"));
+        data.add(new LiquidRecordModel(new Date().getTime(), 400, "Water"));
+        data.add(new LiquidRecordModel(new Date().getTime(), 600, "Orange Juice"));
+        data.add(new LiquidRecordModel(new Date().getTime(), 800, "Water"));
         LiquidRecordAdapter liquidRecordAdapter = new LiquidRecordAdapter(data);
         recycleEntryRecord.setAdapter(liquidRecordAdapter);
     }

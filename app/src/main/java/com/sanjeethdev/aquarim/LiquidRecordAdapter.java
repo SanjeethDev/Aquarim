@@ -7,6 +7,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class LiquidRecordAdapter extends RecyclerView.Adapter<LiquidRecordAdapter.ViewHolder>
 {
@@ -28,7 +29,7 @@ public class LiquidRecordAdapter extends RecyclerView.Adapter<LiquidRecordAdapte
     @Override
     public void onBindViewHolder(@NonNull LiquidRecordAdapter.ViewHolder holder, int position)
     {
-        holder.datetime.setText(localData.get(position).getDatetime().toString());
+        holder.datetime.setText(String.valueOf(new Date(localData.get(position).getDatetime())));
         holder.quantity.setText(String.valueOf(localData.get(position).getQuantity()));
         holder.liquid.setText(localData.get(position).getLiquid());
     }
