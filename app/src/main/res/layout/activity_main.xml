@@ -66,4 +66,51 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:elevation="2dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="15dp"
+        android:background="@drawable/gradient_background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <EditText
+            android:id="@+id/main_liquid_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Liquid Name" />
+
+        <EditText
+            android:id="@+id/main_liquid_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Quantity" />
+
+        <Button
+            android:id="@+id/main_add_entry"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:background="@drawable/ic_add_circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
