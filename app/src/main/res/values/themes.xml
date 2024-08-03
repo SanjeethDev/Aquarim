@@ -8,5 +8,14 @@
 
     <style name="Theme.Aquarim" parent="Base.Theme.Aquarim" />
 
+    <!-- Edit text box -->
+    <style name="FancyEditable">
+        <item name="android:background">@drawable/editable_background_light</item>
+        <item name="android:textColorHint">@color/hint_grey_light</item>
+        <item name="android:paddingStart">6dp</item>
+        <item name="android:paddingEnd">6dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
 
 </resources>
