@@ -1,27 +1,28 @@
 package com.sanjeethdev.aquarim;
 
+import static com.sanjeethdev.aquarim.LiquidRecordContract.Entry.*;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import androidx.annotation.Nullable;
 
 public class LiquidRecordDbHelper extends SQLiteOpenHelper
 {
     private static final String SQL_CREATE_ENTRIES = "CREATE TABLE "
-                    + LiquidRecordContract.LiquidRecordContractEntry.TABLE_NAME
+                    + TABLE_NAME
                     + " ("
-                    + LiquidRecordContract.LiquidRecordContractEntry.COLUMN_ID + "INT PRIMARY KEY, "
-                    + LiquidRecordContract.LiquidRecordContractEntry.COLUMN_NAME_DATE + " BIGINT, "
-                    + LiquidRecordContract.LiquidRecordContractEntry.COLUMN_NAME_LIQUID + " TEXT, "
-                    + LiquidRecordContract.LiquidRecordContractEntry.COLUMN_NAME_QUANTITY + " INTEGER)";
+                    + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + COLUMN_NAME_DATE + " BIGINT, "
+                    + COLUMN_NAME_LIQUID + " TEXT, "
+                    + COLUMN_NAME_QUANTITY + " DOUBLE )";
 
-    private static final String SQL_DELETE_ENTRIES =
-            "DROP TABLE IF EXISTS " + LiquidRecordContract.LiquidRecordContractEntry.TABLE_NAME;
+    private static final String SQL_DELETE_TABLE =
+            "DROP TABLE IF EXISTS " + TABLE_NAME;
 
-    public LiquidRecordDbHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version)
+    public LiquidRecordDbHelper(Context context)
     {
-        super(context, name, factory, version);
+        super(context, TABLE_NAME, null, 1);
     }
 
     @Override
@@ -33,7 +34,23 @@ public class LiquidRecordDbHelper extends SQLiteOpenHelper
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1)
     {
-        sqLiteDatabase.execSQL(SQL_DELETE_ENTRIES);
+        sqLiteDatabase.execSQL(SQL_DELETE_TABLE);
         onCreate(sqLiteDatabase);
+    }
+
+    public boolean insertRecords(long datetime, String liquid_name, double quantity)
+    {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_NAME_LIQUID, liquid_name);
+        contentValues.put(COLUMN_NAME_QUANTITY, quantity);
+        contentValues.put(COLUMN_NAME_DATE, datetime);
+
+        return sqLiteDatabase.insert(TABLE_NAME, null, contentValues) != -1;
+    }
+
+    public Cursor readRecords() {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY " + COLUMN_NAME_DATE + " DESC", null);
     }
 }
