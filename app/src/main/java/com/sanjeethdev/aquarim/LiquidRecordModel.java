@@ -11,7 +11,7 @@ public class LiquidRecordModel
     private String liquid;
 
     // Constructor
-    public LiquidRecordModel(long datetime, int quantity, String liquid)
+    public LiquidRecordModel(long datetime, double quantity, String liquid)
     {
         this.datetime = datetime;
         this.quantity = quantity;
@@ -20,6 +20,7 @@ public class LiquidRecordModel
 
     // Empty Constructor
     public LiquidRecordModel() {}
+
 
     public String printRecord() {
         return liquid + " " + datetime + " " + quantity;
