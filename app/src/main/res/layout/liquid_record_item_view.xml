@@ -3,41 +3,45 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
     <TextView
         android:id="@+id/liquid_record_item_liquid"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="Water"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/liquid_record_item_quantity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintVertical_bias="0.015"
-        android:text="Water"
+        />
+
+    <TextView
+        android:id="@+id/liquid_record_item_quantity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@id/liquid_record_item_liquid"
+        app:layout_constraintTop_toTopOf="@id/liquid_record_item_liquid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/liquid_record_item_liquid"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:text="500 ml"
         />
 
     <TextView
         android:id="@+id/liquid_record_item_datetime"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="@id/liquid_record_item_liquid"
         app:layout_constraintTop_toBottomOf="@id/liquid_record_item_liquid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         android:text="YYYY-MM-DD HH:MM:SS"
+        android:paddingBottom="10dp"
         />
-
-    <TextView
-        android:id="@+id/liquid_record_item_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/liquid_record_item_datetime"
-        app:layout_constraintTop_toTopOf="@id/liquid_record_item_liquid"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/liquid_record_item_datetime"
-        app:layout_constraintHorizontal_bias="0.9"
-        android:text="500 ml"
-        />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
