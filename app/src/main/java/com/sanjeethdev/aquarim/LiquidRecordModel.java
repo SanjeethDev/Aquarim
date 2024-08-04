@@ -7,7 +7,7 @@ public class LiquidRecordModel
     // All the data required for a record.
     // Record == Water intake information.
     private long datetime;
-    private int quantity;
+    private double quantity;
     private String liquid;
 
     // Constructor
@@ -35,12 +35,12 @@ public class LiquidRecordModel
         this.datetime = datetime;
     }
 
-    public int getQuantity()
+    public double getQuantity()
     {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 
