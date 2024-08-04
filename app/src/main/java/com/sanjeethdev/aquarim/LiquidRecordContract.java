@@ -8,7 +8,7 @@ public final class LiquidRecordContract
     private LiquidRecordContract() {}
 
     // All the constants required for the database.
-    public static class LiquidRecordContractEntry implements BaseColumns
+    public static class Entry implements BaseColumns
     {
         public static final String TABLE_NAME = "LiquidIntake";
         public static final String COLUMN_ID = BaseColumns._ID;
