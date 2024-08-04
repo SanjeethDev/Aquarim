@@ -51,6 +51,7 @@
         android:layout_width="52dp"
         android:layout_height="52dp"
         android:text=""
+        android:enabled="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/main_action_button"
         app:layout_constraintTop_toBottomOf="@id/main_record_container"
@@ -61,23 +62,29 @@
         android:layout_width="52dp"
         android:layout_height="52dp"
         android:text=""
+        android:enabled="false"
         app:layout_constraintTop_toBottomOf="@id/main_record_container"
         app:layout_constraintStart_toEndOf="@id/main_action_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <LinearLayout
+        android:id="@+id/main_add_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:elevation="2dp"
+        android:gravity="center_horizontal"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="15dp"
+        android:layout_marginVertical="10dp"
         android:background="@drawable/gradient_background"
+        android:visibility="gone"
+        android:padding="15dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/main_action_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="1">
 
         <EditText
             android:id="@+id/main_liquid_name"
@@ -87,30 +94,33 @@
             android:textColor="@color/white"
             android:ems="10"
             android:inputType="text"
-            android:text="Liquid Name" />
+            android:hint="Liquid Name"
+            style="@style/FancyEditable"/>
 
         <EditText
             android:id="@+id/main_liquid_quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:textColor="@color/white"
             android:ems="10"
-            android:inputType="text"
-            android:text="Quantity" />
+            android:inputType="numberDecimal"
+            android:hint="Quantity (ml)"
+            style="@style/FancyEditable"/>
 
         <Button
             android:id="@+id/main_add_entry"
-            android:layout_width="52dp"
+            android:layout_width="wrap_content"
             android:layout_height="52dp"
-            android:layout_marginBottom="15dp"
-            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_weight="2"
             android:focusable="true"
-            android:background="@drawable/ic_add_circle"
+            android:text="Add"
+            android:enabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
