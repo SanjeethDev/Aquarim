@@ -7,6 +7,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class LiquidRecordDbHelper extends SQLiteOpenHelper
 {
     private static final String SQL_CREATE_ENTRIES = "CREATE TABLE "
@@ -51,6 +54,18 @@ public class LiquidRecordDbHelper extends SQLiteOpenHelper
 
     public Cursor readRecords() {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY " + COLUMN_NAME_DATE + " DESC", null);
+        return sqLiteDatabase.rawQuery("SELECT * FROM "
+                        + TABLE_NAME
+                        + " ORDER BY "
+                        + COLUMN_NAME_DATE
+                        + " DESC", null);
+    }
+
+    public boolean deleteRecord(int id, long datetime)
+    {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        return sqLiteDatabase.delete(TABLE_NAME,
+                COLUMN_ID + "=? AND " + COLUMN_NAME_DATE + "=?",
+                new String[]{String.valueOf(id),String.valueOf(datetime)}) != -1;
     }
 }
