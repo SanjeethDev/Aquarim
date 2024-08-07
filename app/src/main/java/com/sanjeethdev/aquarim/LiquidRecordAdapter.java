@@ -14,6 +14,8 @@ public class LiquidRecordAdapter extends RecyclerView.Adapter<LiquidRecordAdapte
     // Array of LiquidRecordModel objects => date, liquid, quantity.
     private final ArrayList<LiquidRecordModel> localData;
 
+    private final RecordItemInterface recordItemInterface;
+
     // Implemented methods of Recycler View.
     // Create new view (invoked by the layout manager).
     @NonNull
@@ -22,7 +24,7 @@ public class LiquidRecordAdapter extends RecyclerView.Adapter<LiquidRecordAdapte
     {
         // Create a new view, which defines the UI of the list item.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.liquid_record_item_view, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, recordItemInterface);
     }
 
     // Set the values of each element in the item view.
@@ -44,16 +46,29 @@ public class LiquidRecordAdapter extends RecyclerView.Adapter<LiquidRecordAdapte
     {
         private final TextView liquid, datetime, quantity;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, RecordItemInterface recordItemInterface) {
             super(itemView);
             liquid = itemView.findViewById(R.id.liquid_record_item_liquid);
             datetime = itemView.findViewById(R.id.liquid_record_item_datetime);
             quantity = itemView.findViewById(R.id.liquid_record_item_quantity);
+
+            itemView.setOnClickListener(view ->
+            {
+                if (recordItemInterface != null)
+                {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION)
+                    {
+                        recordItemInterface.onItemClick(position);
+                    }
+                }
+            });
         }
     }
 
     // Initialize the dataset of the adapter.
-    public LiquidRecordAdapter(ArrayList<LiquidRecordModel> data) {
-        localData = data;
+    public LiquidRecordAdapter(ArrayList<LiquidRecordModel> data, RecordItemInterface recordItemInterface) {
+        this.localData = data;
+        this.recordItemInterface = recordItemInterface;
     }
 }
