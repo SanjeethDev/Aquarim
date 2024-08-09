@@ -18,4 +18,13 @@
         <item name="android:paddingBottom">12dp</item>
     </style>
 
+    <!-- Pop up window -->
+    <style name="Theme.Aquarim.FancyPopUps">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name = "android:windowBackground" > @android:color/transparent</item>
+        <item name="android:background">@drawable/editable_background_light</item>
+        <item name="android:textColorHint">@color/hint_grey_light</item>
+    </style>
+
 </resources>
