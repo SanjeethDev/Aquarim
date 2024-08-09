@@ -61,11 +61,11 @@ public class LiquidRecordDbHelper extends SQLiteOpenHelper
                         + " DESC", null);
     }
 
-    public boolean deleteRecord(int id, long datetime)
+    public boolean deleteRecord(long datetime)
     {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         return sqLiteDatabase.delete(TABLE_NAME,
-                COLUMN_ID + "=? AND " + COLUMN_NAME_DATE + "=?",
-                new String[]{String.valueOf(id),String.valueOf(datetime)}) != -1;
+                  COLUMN_NAME_DATE + "=?",
+                new String[]{String.valueOf(datetime)}) != -1;
     }
 }
