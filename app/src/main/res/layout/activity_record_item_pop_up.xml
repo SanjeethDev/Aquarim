@@ -5,12 +5,13 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+    <EditText
         android:id="@+id/liquid_record_item_liquid"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/itemview_liquidname"
         android:textAlignment="center"
+        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/liquid_record_item_quantity"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,11 +19,12 @@
         app:layout_constraintVertical_bias="0.015"
         />
 
-    <TextView
+    <EditText
         android:id="@+id/liquid_record_item_quantity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:inputType="numberDecimal"
         app:layout_constraintStart_toEndOf="@id/liquid_record_item_liquid"
         app:layout_constraintTop_toTopOf="@id/liquid_record_item_liquid"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,11 +33,12 @@
         android:text="@string/itemview_quantityformat"
         />
 
-    <TextView
+    <EditText
         android:id="@+id/liquid_record_item_datetime"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:inputType="datetime"
         app:layout_constraintStart_toStartOf="@id/liquid_record_item_liquid"
         app:layout_constraintTop_toBottomOf="@id/liquid_record_item_liquid"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,13 +49,29 @@
 
     <Button
         android:id="@+id/record_popup_delete"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Delete"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/record_popup_save"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/liquid_record_item_datetime"
         app:layout_constraintHorizontal_bias="0.9"
+        android:background="@color/black"
         />
+
+    <Button
+        android:id="@+id/record_popup_save"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_marginStart="5dp"
+        android:enabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/record_popup_delete"
+        app:layout_constraintTop_toBottomOf="@+id/liquid_record_item_datetime"
+        app:layout_constraintHorizontal_bias="0.9"
+        android:background="@color/black"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
