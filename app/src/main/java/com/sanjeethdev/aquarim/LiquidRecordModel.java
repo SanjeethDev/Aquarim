@@ -1,5 +1,6 @@
 package com.sanjeethdev.aquarim;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class LiquidRecordModel
@@ -20,7 +21,6 @@ public class LiquidRecordModel
 
     // Empty Constructor
     public LiquidRecordModel() {}
-
 
     public String printRecord() {
         return liquid + " " + datetime + " " + quantity;
