@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <EditText
@@ -56,7 +57,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/liquid_record_item_datetime"
         app:layout_constraintHorizontal_bias="0.9"
-        android:background="@color/black"
+        style="@style/FancyEditable"
         />
 
     <Button
@@ -70,7 +71,7 @@
         app:layout_constraintStart_toEndOf="@id/record_popup_delete"
         app:layout_constraintTop_toBottomOf="@+id/liquid_record_item_datetime"
         app:layout_constraintHorizontal_bias="0.9"
-        android:background="@color/black"
+        style="@style/FancyEditable"
         />
 
 
