@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
     protected void onResume()
     {
         super.onResume();
-
+        getRecords();
     }
 
     @Override
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
         View viewBinding = binding.getRoot();
         setContentView(viewBinding);
 
+        getRecords();
         // OnClickListener for main add button.
         binding.mainActionButton.setOnClickListener(view ->
         {
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
                     if (result)
                     {
                         Toast.makeText(this, "Done!", Toast.LENGTH_SHORT).show();
+                        getRecords();
                     }
                     else
                     {
