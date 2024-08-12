@@ -1,13 +1,9 @@
 package com.sanjeethdev.aquarim;
 
-import static com.sanjeethdev.aquarim.LiquidRecordContract.Entry.*;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AlertDialogLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -59,19 +55,22 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
                     {
-                        binding.mainAddEntry.setEnabled(charSequence.length() > 0 && binding.mainLiquidQuantity.getText().length() > 0);
+                        binding.mainAddEntry.setEnabled(charSequence.length() > 0
+                                && binding.mainLiquidQuantity.getText().length() > 0);
                     }
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
                     {
-                        binding.mainAddEntry.setEnabled(charSequence.length() > 0 && binding.mainLiquidQuantity.getText().length() > 0);
+                        binding.mainAddEntry.setEnabled(charSequence.length() > 0
+                                && binding.mainLiquidQuantity.getText().length() > 0);
                     }
 
                     @Override
                     public void afterTextChanged(Editable editable)
                     {
-                        binding.mainAddEntry.setEnabled(editable.length() > 0 && binding.mainLiquidQuantity.getText().length() > 0);
+                        binding.mainAddEntry.setEnabled(editable.length() > 0
+                                && binding.mainLiquidQuantity.getText().length() > 0);
                     }
                 });
 
@@ -80,30 +79,36 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
                     {
-                        binding.mainAddEntry.setEnabled(charSequence.length() > 0 && binding.mainLiquidName.getText().length() > 0);
+                        binding.mainAddEntry.setEnabled(charSequence.length() > 0
+                                && binding.mainLiquidName.getText().length() > 0);
                     }
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
                     {
-                        binding.mainAddEntry.setEnabled(charSequence.length() > 0 && binding.mainLiquidName.getText().length() > 0);
+                        binding.mainAddEntry.setEnabled(charSequence.length() > 0
+                                && binding.mainLiquidName.getText().length() > 0);
                     }
 
                     @Override
                     public void afterTextChanged(Editable editable)
                     {
-                        binding.mainAddEntry.setEnabled(editable.length() > 0 && binding.mainLiquidName.getText().length() > 0);
+                        binding.mainAddEntry.setEnabled(editable.length() > 0
+                                && binding.mainLiquidName.getText().length() > 0);
                     }
                 });
 
-                // OnClickListener for add button
+                // OnClickListener for add button.
                 binding.mainAddEntry.setOnClickListener(view1 ->
                 {
-                    LiquidRecordDbHelper liquidRecordDbHelper = new LiquidRecordDbHelper(this);
-                    boolean result = liquidRecordDbHelper.insertRecords(
-                            new Date().getTime(),
-                            binding.mainLiquidName.getText().toString(),
-                            Double.parseDouble(binding.mainLiquidQuantity.getText().toString()));
+                    boolean result;
+                    try (LiquidRecordDbHelper liquidRecordDbHelper = new LiquidRecordDbHelper(this))
+                    {
+                        result = liquidRecordDbHelper.insertRecords(
+                                new Date().getTime(),
+                                binding.mainLiquidName.getText().toString(),
+                                Double.parseDouble(binding.mainLiquidQuantity.getText().toString()));
+                    }
                     if (result)
                     {
                         Toast.makeText(this, "Done!", Toast.LENGTH_SHORT).show();
@@ -139,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
         startActivity(intent);
     }
 
+    // Gets records from databases and sets it to adapter to display.
     private void getRecords() {
         // Test code to look at the data and views.
         data = new ArrayList<>();
@@ -147,9 +153,6 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
         try (LiquidRecordDbHelper liquidRecordDbHelper = new LiquidRecordDbHelper(this))
         {
             cursor = liquidRecordDbHelper.readRecords();
-            Log.d("DEBUG", "onCreate: " + Arrays.toString(cursor.getColumnNames()));
-            Log.d("DEBUG", "onCreate: " + cursor.getCount());
-
             // Take the records stored in cursor and process it to views.
             if (cursor.getCount() == 0)
             {
@@ -161,7 +164,6 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
                 {
                     do
                     {
-                        Log.d("DEBUG", "data: " + new Date(cursor.getLong(1)) + " " + cursor.getDouble(3) + " " + cursor.getString(2));
                         data.add(new LiquidRecordModel(
                                 cursor.getLong(1),
                                 cursor.getDouble(3),
@@ -172,7 +174,6 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
             }
             cursor.close();
         }
-
         // Set adapter for the recycler view (after the data has been populated).
         liquidRecordAdapter = new LiquidRecordAdapter(data, this);
         binding.mainRecordView.setAdapter(liquidRecordAdapter);
