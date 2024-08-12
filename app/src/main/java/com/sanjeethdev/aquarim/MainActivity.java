@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 import com.sanjeethdev.aquarim.databinding.ActivityMainBinding;
 import java.util.ArrayList;
@@ -113,15 +114,25 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
                     {
                         Toast.makeText(this, "Done!", Toast.LENGTH_SHORT).show();
                         getRecords();
-                    }
-                    else
+                    } else
                     {
                         Toast.makeText(this, "Something went wrong.", Toast.LENGTH_SHORT).show();
                     }
                 });
-            }
-            else
+            } else
             {
+                // Hides the virtual keyboard if its open.
+                try {
+                    if (getCurrentFocus() != null)
+                    {
+                        InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                    }
+                } catch (Exception e)
+                {
+                    Log.d("DEBUG", "onCreate: " + e.getLocalizedMessage());
+                }
+
                 binding.mainAddDialog.setVisibility(View.GONE);
                 binding.mainActionButton.animate()
                         .rotation(0)
@@ -157,8 +168,7 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
             if (cursor.getCount() == 0)
             {
                 Toast.makeText(this, "Empty History", Toast.LENGTH_SHORT).show();
-            }
-            else
+            } else
             {
                 if (cursor.moveToFirst())
                 {
@@ -168,8 +178,7 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
                                 cursor.getLong(1),
                                 cursor.getDouble(3),
                                 cursor.getString(2)));
-                    }
-                    while (cursor.moveToNext());
+                    } while (cursor.moveToNext());
                 }
             }
             cursor.close();
