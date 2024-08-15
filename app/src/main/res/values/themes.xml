@@ -22,9 +22,12 @@
     <style name="Theme.Aquarim.FancyPopUps">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowCloseOnTouchOutside">true</item>
-        <item name = "android:windowBackground" > @android:color/transparent</item>
-        <item name="android:background">@drawable/editable_background_light</item>
+        <item name="android:windowBackground" > @android:color/transparent</item>
         <item name="android:textColorHint">@color/hint_grey_light</item>
+    </style>
+
+    <style name="Theme.Aquarim.FancyButtons">
+        <item name="android:background">@drawable/button_background_light</item>
     </style>
 
 </resources>
