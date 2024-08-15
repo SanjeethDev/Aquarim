@@ -35,7 +35,7 @@ public class RecordItemPopUp extends AppCompatActivity
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width = displayMetrics.widthPixels;
-        getWindow().setLayout((int) (width*0.9), LinearLayout.LayoutParams.WRAP_CONTENT);
+        getWindow().setLayout((int) (width*0.93), LinearLayout.LayoutParams.WRAP_CONTENT);
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;
         params.x = 0;
