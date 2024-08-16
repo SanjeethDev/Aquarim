@@ -7,15 +7,37 @@
     tools:context=".MainActivity"
     android:background="@drawable/gradient_background">
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:id="@+id/main_water_level"
         android:layout_width="50dp"
         android:layout_height="0dp"
         android:layout_marginVertical="10dp"
-        app:cardBackgroundColor="@color/white"
+        android:background="@drawable/water_tank_background"
         app:layout_constraintBottom_toTopOf="@id/main_action_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:rotationX="180">
+            <View
+                android:id="@+id/main_progress_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:backgroundTint="@color/highlight_blue"
+                android:backgroundTintMode="src_atop"
+                android:background="@drawable/water_tank_background"
+                android:scaleY="0.0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/main_action_button"
@@ -69,60 +91,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/main_add_dialog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:elevation="2dp"
-        android:gravity="center_horizontal"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="10dp"
-        android:background="@drawable/gradient_background_rounded"
-        android:visibility="gone"
-        android:padding="15dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/main_action_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.5">
-
-        <EditText
-            android:id="@+id/main_liquid_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/white"
-            android:ems="10"
-            android:inputType="text"
-            android:hint="Liquid Name"
-            style="@style/FancyEditable"/>
-
-        <EditText
-            android:id="@+id/main_liquid_quantity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:textColor="@color/white"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:hint="Quantity (ml)"
-            style="@style/FancyEditable"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/main_add_entry"
-            android:layout_width="wrap_content"
-            android:layout_height="52dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="2"
-            android:focusable="true"
-            android:text="Add"
-            android:enabled="false"
-            style="@style/FancyButtons"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
