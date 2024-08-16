@@ -32,20 +32,8 @@ public class RecordItemPopUp extends AppCompatActivity
         View viewBinding = binding.getRoot();
         setContentView(viewBinding);
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int width = displayMetrics.widthPixels;
-        getWindow().setLayout((int) (width*0.93), LinearLayout.LayoutParams.WRAP_CONTENT);
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.gravity = Gravity.CENTER;
-        params.x = 0;
-        params.y = -20;
-
-        getWindow().setAttributes(params);
-
         Bundle bundle = Objects.requireNonNull(getIntent().getExtras()).getBundle("bundle");
         assert bundle != null;
-        Log.d("DEBUG", "onCreate: " + bundle.getString("liquid"));
         binding.liquidRecordItemLiquid.setText(bundle.getString("liquid"));
         binding.liquidRecordItemQuantity.setText(String.valueOf(bundle.getDouble("quantity")));
         binding.liquidRecordItemDatetime.setText(String.valueOf(bundle.getLong("datetime")));
