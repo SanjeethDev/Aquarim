@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class LiquidRecordAdapter extends RecyclerView.Adapter<LiquidRecordAdapter.ViewHolder>
 {
@@ -35,7 +36,7 @@ public class LiquidRecordAdapter extends RecyclerView.Adapter<LiquidRecordAdapte
     {
         //Tue 09:00 April 25, 2024
         Date date = new Date(localData.get(position).getDatetime());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss", Locale.US);
         holder.datetime.setText(simpleDateFormat.format(date));
         holder.quantity.setText(String.valueOf(localData.get(position).getQuantity()));
         holder.liquid.setText(localData.get(position).getLiquid());
