@@ -10,7 +10,7 @@
     tools:context=".AddRecordPopUp">
 
     <EditText
-        android:id="@+id/main_liquid_name"
+        android:id="@+id/add_liquid_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -22,12 +22,12 @@
         app:layout_constraintVertical_bias="0"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/main_liquid_quantity"
+        app:layout_constraintEnd_toStartOf="@id/add_liquid_quantity"
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
     <EditText
-        android:id="@+id/main_liquid_quantity"
+        android:id="@+id/add_liquid_quantity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -37,14 +37,14 @@
         android:inputType="numberDecimal"
         android:hint="Quantity (ml)"
         style="@style/FancyEditable"
-        app:layout_constraintStart_toEndOf="@id/main_liquid_name"
-        app:layout_constraintTop_toTopOf="@id/main_liquid_name"
-        app:layout_constraintBottom_toBottomOf="@id/main_liquid_name"
+        app:layout_constraintStart_toEndOf="@id/add_liquid_name"
+        app:layout_constraintTop_toTopOf="@id/add_liquid_name"
+        app:layout_constraintBottom_toBottomOf="@id/add_liquid_name"
         app:layout_constraintEnd_toEndOf="parent"
         />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/main_add_entry"
+        android:id="@+id/add_liquid"
         android:layout_width="wrap_content"
         android:layout_height="52dp"
         android:layout_marginTop="10dp"
@@ -52,9 +52,9 @@
         android:text="Add"
         android:enabled="false"
         style="@style/FancyButtons"
-        app:layout_constraintTop_toBottomOf="@id/main_liquid_name"
-        app:layout_constraintStart_toStartOf="@id/main_liquid_name"
-        app:layout_constraintEnd_toEndOf="@id/main_liquid_quantity"
+        app:layout_constraintTop_toBottomOf="@id/add_liquid_name"
+        app:layout_constraintStart_toStartOf="@id/add_liquid_name"
+        app:layout_constraintEnd_toEndOf="@id/add_liquid_quantity"
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
