@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="transparent">#00000000</color>
+    <color name="text_background">#FFFFFFFF</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="hint_grey_light">#B3B3B3</color>
-    <color name="hint_grey_dark">#4D4D4D</color>
-    <color name="dark_background_blue">#161B23</color>
-    <color name="transparent">#00000000</color>
-    <color name="light_background_blue">#5287DC</color>
+    <color name="hint_grey">#4D4D4D</color>
+    <color name="item_background_blue">#8DADDE</color>
+    <color name="highlight_blue">#182842</color>
+    <color name="background_gradient_dark">#9CC1FA</color>
+    <color name="background_gradient_light">#CFE2FF</color>
 </resources>
