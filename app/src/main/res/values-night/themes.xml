@@ -25,8 +25,9 @@
         <item name="android:windowBackground"> @android:color/transparent</item>
         <item name="android:textColorHint">@color/hint_grey</item>
     </style>
-
+    
     <style name="FancyButtons">
+        <item name="android:textColor">@color/black</item>
         <item name="android:background">@drawable/button_background</item>
     </style>
 </resources>
