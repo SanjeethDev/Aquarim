@@ -1,20 +1,13 @@
 package com.sanjeethdev.aquarim;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
 import com.sanjeethdev.aquarim.databinding.ActivityAddRecordPopUpBinding;
-import com.sanjeethdev.aquarim.databinding.ActivityRecordItemPopUpBinding;
-
 import java.util.Date;
 
 public class AddRecordPopUp extends AppCompatActivity
@@ -81,16 +74,22 @@ public class AddRecordPopUp extends AppCompatActivity
         binding.addLiquid.setOnClickListener(view1 ->
         {
             boolean result;
+            long datetime;
+            double quantity;
+            String liquid;
             try (LiquidRecordDbHelper liquidRecordDbHelper = new LiquidRecordDbHelper(this))
             {
-                result = liquidRecordDbHelper.insertRecords(
-                        new Date().getTime(),
-                        binding.addLiquidName.getText().toString(),
-                        Double.parseDouble(binding.addLiquidQuantity.getText().toString()));
+                datetime = new Date().getTime();
+                quantity = Double.parseDouble(binding.addLiquidQuantity.getText().toString());
+                liquid = binding.addLiquidName.getText().toString();
+                result = liquidRecordDbHelper.insertRecords(datetime, liquid, quantity);
+
             }
             if (result)
             {
-                Toast.makeText(this, "Done!", Toast.LENGTH_SHORT).show();
+                Intent output = new Intent(AddRecordPopUp.this, MainActivity.class);
+                output.putExtra("insert", new LiquidRecordModel(datetime, quantity, liquid));
+                setResult(RESULT_OK, output);
                 finish();
             } else
             {
