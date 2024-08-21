@@ -1,33 +1,52 @@
 package com.sanjeethdev.aquarim;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 import com.sanjeethdev.aquarim.databinding.ActivityMainBinding;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements RecordItemInterface
 {
     private ActivityMainBinding binding;
     private LiquidRecordAdapter liquidRecordAdapter;
     private ArrayList<LiquidRecordModel> data;
-
-    @Override
-    protected void onResume()
+    private final ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+    activityResult ->
     {
-        super.onResume();
-        getRecords();
-    }
+        if (activityResult.getResultCode() == Activity.RESULT_OK)
+        {
+            if (activityResult.getData() != null)
+            {
+                if (activityResult.getData().hasExtra("delete"))
+                {
+                    int position = activityResult.getData().getIntExtra("delete", -1);
+                    if (position >= 0)
+                    {
+                        liquidRecordAdapter.notifyItemRemoved(position);
+                        data.remove(position);
+                    }
+                } else if (activityResult.getData().hasExtra("insert"))
+                {
+                    data.add(0, (LiquidRecordModel) activityResult.getData().getSerializableExtra("insert"));
+                    liquidRecordAdapter.notifyItemInserted(0);
+                    binding.mainRecordView.scrollToPosition(0);
+                } else
+                {
+                    Log.d("DEBUG", "function not found.");
+                }
+            }
+        }
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,108 +56,13 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View viewBinding = binding.getRoot();
         setContentView(viewBinding);
-
+        binding.mainProgressView.setPivotY(0);
         getRecords();
         // OnClickListener for main add button.
         binding.mainActionButton.setOnClickListener(view ->
         {
-            // Visible = 0; Invisible = 4; Gone = 8
-            if (binding.mainAddDialog.getVisibility() == View.GONE)
-            {
-                binding.mainAddDialog.setVisibility(View.VISIBLE);
-                binding.mainActionButton.animate()
-                        .rotation(45)
-                        .setDuration(250)
-                        .start();
-
-                binding.mainLiquidName.addTextChangedListener(new TextWatcher()
-                {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
-                    {
-                        binding.mainAddEntry.setEnabled(charSequence.length() > 0
-                                && binding.mainLiquidQuantity.getText().length() > 0);
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
-                    {
-                        binding.mainAddEntry.setEnabled(charSequence.length() > 0
-                                && binding.mainLiquidQuantity.getText().length() > 0);
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable editable)
-                    {
-                        binding.mainAddEntry.setEnabled(editable.length() > 0
-                                && binding.mainLiquidQuantity.getText().length() > 0);
-                    }
-                });
-
-                binding.mainLiquidQuantity.addTextChangedListener(new TextWatcher()
-                {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
-                    {
-                        binding.mainAddEntry.setEnabled(charSequence.length() > 0
-                                && binding.mainLiquidName.getText().length() > 0);
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
-                    {
-                        binding.mainAddEntry.setEnabled(charSequence.length() > 0
-                                && binding.mainLiquidName.getText().length() > 0);
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable editable)
-                    {
-                        binding.mainAddEntry.setEnabled(editable.length() > 0
-                                && binding.mainLiquidName.getText().length() > 0);
-                    }
-                });
-
-                // OnClickListener for add button.
-                binding.mainAddEntry.setOnClickListener(view1 ->
-                {
-                    boolean result;
-                    try (LiquidRecordDbHelper liquidRecordDbHelper = new LiquidRecordDbHelper(this))
-                    {
-                        result = liquidRecordDbHelper.insertRecords(
-                                new Date().getTime(),
-                                binding.mainLiquidName.getText().toString(),
-                                Double.parseDouble(binding.mainLiquidQuantity.getText().toString()));
-                    }
-                    if (result)
-                    {
-                        Toast.makeText(this, "Done!", Toast.LENGTH_SHORT).show();
-                        getRecords();
-                    } else
-                    {
-                        Toast.makeText(this, "Something went wrong.", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } else
-            {
-                // Hides the virtual keyboard if its open.
-                try {
-                    if (getCurrentFocus() != null)
-                    {
-                        InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-                    }
-                } catch (Exception e)
-                {
-                    Log.d("DEBUG", "onCreate: " + e.getLocalizedMessage());
-                }
-
-                binding.mainAddDialog.setVisibility(View.GONE);
-                binding.mainActionButton.animate()
-                        .rotation(0)
-                        .setDuration(250)
-                        .start();
-            }
+            resultLauncher.launch(new Intent(this, AddRecordPopUp.class));
+            overridePendingTransition(R.anim.slide_in_from_bottom, R.anim.slide_out_to_bottom);
         });
     }
 
@@ -151,8 +75,10 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
         bundle.putString("liquid", data.get(position).getLiquid());
         bundle.putDouble("quantity", data.get(position).getQuantity());
         bundle.putLong("datetime", data.get(position).getDatetime());
+        bundle.putInt("position", position);
         intent.putExtra("bundle", bundle);
-        startActivity(intent);
+        resultLauncher.launch(intent);
+        overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
     }
 
     // Gets records from databases and sets it to adapter to display.
@@ -186,5 +112,11 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
         // Set adapter for the recycler view (after the data has been populated).
         liquidRecordAdapter = new LiquidRecordAdapter(data, this);
         binding.mainRecordView.setAdapter(liquidRecordAdapter);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
     }
 }
