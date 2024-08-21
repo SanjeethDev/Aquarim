@@ -1,9 +1,8 @@
 package com.sanjeethdev.aquarim;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.io.Serializable;
 
-public class LiquidRecordModel
+public class LiquidRecordModel implements Serializable
 {
     // All the data required for a record.
     // Record == Water intake information.
