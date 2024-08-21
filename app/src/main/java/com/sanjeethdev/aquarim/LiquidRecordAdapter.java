@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,7 +37,8 @@ public class LiquidRecordAdapter extends RecyclerView.Adapter<LiquidRecordAdapte
         Date date = new Date(localData.get(position).getDatetime());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss", Locale.US);
         holder.datetime.setText(simpleDateFormat.format(date));
-        holder.quantity.setText(String.valueOf(localData.get(position).getQuantity()));
+        String quantity = String.valueOf(localData.get(position).getQuantity()).replace(".0", "");
+        holder.quantity.setText(quantity);
         holder.liquid.setText(localData.get(position).getLiquid());
     }
 
