@@ -11,12 +11,11 @@ import java.util.Objects;
 public class RecordItemPopUp extends AppCompatActivity
 {
 
-    private ActivityRecordItemPopUpBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        binding = ActivityRecordItemPopUpBinding.inflate(getLayoutInflater());
+        ActivityRecordItemPopUpBinding binding = ActivityRecordItemPopUpBinding.inflate(getLayoutInflater());
         View viewBinding = binding.getRoot();
         setContentView(viewBinding);
 
