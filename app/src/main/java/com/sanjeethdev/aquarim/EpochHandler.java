@@ -33,10 +33,5 @@ public class EpochHandler
     {
         return numberOfSeconds * EPOCH_SEC;
     }
-
-    public long getToday()
-    {
-
-    }
-
+    
 }
