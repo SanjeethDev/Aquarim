@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
         Cursor cursor;
         try (LiquidRecordDbHelper liquidRecordDbHelper = new LiquidRecordDbHelper(this))
         {
-            cursor = liquidRecordDbHelper.readRecords();
+            cursor = liquidRecordDbHelper.todayRecords();
             // Take the records stored in cursor and process it to views.
             if (cursor.getCount() == 0)
             {
