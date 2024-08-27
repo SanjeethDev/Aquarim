@@ -1,37 +1,35 @@
 package com.sanjeethdev.aquarim;
 
-import java.time.LocalDate;
-import java.time.ZoneOffset;
+import java.util.Calendar;
 
 public class EpochHandler
 {
-    // Constants
-    private final long EPOCH_SEC = 1000;
-    private final long EPOCH_MIN = 60000;
-    private final long EPOCH_HOUR = 3600000;
-    private final long EPOCH_DAY = 86400000;
+    // {HOUR, MIN, SECS, MILLISECS}
+    // Defaults
+    private int[] dayStartingTime = {0,0,0,0};
+    private int[] dayEndingTime = {23,59,59,999};
 
     // Empty Constructor
     public EpochHandler() {}
 
-    public long addDays(int numberOfDays)
+    public long todayStart()
     {
-        return numberOfDays * EPOCH_DAY;
+        Calendar todayStart = Calendar.getInstance();
+        todayStart.set(Calendar.HOUR_OF_DAY,dayStartingTime[0]);
+        todayStart.set(Calendar.MINUTE, dayStartingTime[1]);
+        todayStart.set(Calendar.SECOND, dayStartingTime[2]);
+        todayStart.set(Calendar.MILLISECOND, dayStartingTime[3]);
+        return todayStart.getTimeInMillis();
     }
 
-    public long addHours(int numberOfHours)
+    public long todayEnd()
     {
-        return numberOfHours * EPOCH_HOUR;
+        Calendar todayEnd = Calendar.getInstance();
+        todayEnd.set(Calendar.HOUR_OF_DAY,dayEndingTime[0]);
+        todayEnd.set(Calendar.MINUTE, dayEndingTime[1]);
+        todayEnd.set(Calendar.SECOND, dayEndingTime[2]);
+        todayEnd.set(Calendar.MILLISECOND, dayEndingTime[3]);
+        return todayEnd.getTimeInMillis();
     }
 
-    public long addMinutes(int numberOfMinutes)
-    {
-        return numberOfMinutes * EPOCH_MIN;
-    }
-
-    public long addSeconds(int numberOfSeconds)
-    {
-        return numberOfSeconds * EPOCH_SEC;
-    }
-    
 }
