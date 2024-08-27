@@ -49,7 +49,7 @@ public class LiquidRecordDbHelper extends SQLiteOpenHelper
         return sqLiteDatabase.insert(TABLE_NAME, null, contentValues) != -1;
     }
 
-    public Cursor readRecords()
+    public Cursor allRecords()
     {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         return sqLiteDatabase.rawQuery("SELECT * FROM "
@@ -62,9 +62,12 @@ public class LiquidRecordDbHelper extends SQLiteOpenHelper
     public Cursor todayRecords()
     {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        EpochHandler epochHandler = new EpochHandler();
         return sqLiteDatabase.rawQuery("SELECT * FROM "
                 + TABLE_NAME
-                + "WHERE" + COLUMN_NAME_DATE + "BETWEEN"
+                + " WHERE " + COLUMN_NAME_DATE
+                + " BETWEEN " + epochHandler.todayStart()
+                + " AND " + epochHandler.todayEnd()
                 + " ORDER BY "
                 + COLUMN_NAME_DATE
                 + " DESC", null);
