@@ -18,17 +18,15 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:rotationX="180">
-            <View
-                android:id="@+id/main_progress_view"
+            android:layout_height="match_parent">
+            <ProgressBar
+                android:id="@+id/main_progress_bar"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_centerInParent="true"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:backgroundTint="@color/highlight_blue"
-                android:backgroundTintMode="src_atop"
-                android:scaleY="0.0"
+                android:layout_height="match_parent"
+                android:max="100"
+                android:progressDrawable="@drawable/progress_drawable_vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,12 +56,12 @@
         app:layout_constraintStart_toEndOf="@id/main_water_level"
         app:layout_constraintBottom_toBottomOf="@id/main_water_level"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/main_water_level" >
+        app:layout_constraintTop_toTopOf="@id/main_water_level">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/main_record_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/transparent"/>
+            android:background="@drawable/record_background"/>
 
     </androidx.cardview.widget.CardView>
 
