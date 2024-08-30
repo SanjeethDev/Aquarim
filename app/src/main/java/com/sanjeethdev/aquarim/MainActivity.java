@@ -56,8 +56,8 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View viewBinding = binding.getRoot();
         setContentView(viewBinding);
-        binding.mainProgressView.setPivotY(0);
         getRecords();
+        goalPercentage();
         // OnClickListener for main add button.
         binding.mainActionButton.setOnClickListener(view ->
         {
@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
             overridePendingTransition(R.anim.slide_in_from_bottom, R.anim.slide_out_to_bottom);
         });
     }
+
 
     // Item click interface implementation for record view.
     @Override
@@ -81,8 +82,23 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
         overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
     }
 
+    // Calculate the percentage of the daily goal based on today's records.
+    public void goalPercentage()
+    {
+        int weight = 55;
+        int total = weight * 35;
+        double sum = 0;
+        for (LiquidRecordModel record: data)
+        {
+            sum += record.getQuantity();
+        }
+        // current / total * 100
+        binding.mainProgressBar.setProgress((int) ((sum/total)*100), true);
+    }
+
     // Gets records from databases and sets it to adapter to display.
-    private void getRecords() {
+    private void getRecords()
+    {
         // Test code to look at the data and views.
         data = new ArrayList<>();
         binding.mainRecordView.setLayoutManager(new LinearLayoutManager(this));
@@ -118,5 +134,6 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
     protected void onResume()
     {
         super.onResume();
+        goalPercentage();
     }
 }
