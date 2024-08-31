@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewOutlineProvider;
 import android.widget.Toast;
 import com.sanjeethdev.aquarim.databinding.ActivityMainBinding;
 import java.util.ArrayList;
@@ -56,16 +57,24 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View viewBinding = binding.getRoot();
         setContentView(viewBinding);
+
+        // Get values
         getRecords();
         goalPercentage();
+
         // OnClickListener for main add button.
         binding.mainActionButton.setOnClickListener(view ->
         {
             resultLauncher.launch(new Intent(this, AddRecordPopUp.class));
             overridePendingTransition(R.anim.slide_in_from_bottom, R.anim.slide_out_to_bottom);
         });
-    }
 
+        // Any view that has top clip its children.
+        binding.mainRecordView.setOutlineProvider(ViewOutlineProvider.BACKGROUND);
+        binding.mainRecordView.setClipToOutline(true);
+        binding.mainLiquidLevel.setOutlineProvider(ViewOutlineProvider.BACKGROUND);
+        binding.mainLiquidLevel.setClipToOutline(true);
+    }
 
     // Item click interface implementation for record view.
     @Override
