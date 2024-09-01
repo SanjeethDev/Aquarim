@@ -4,6 +4,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewOutlineProvider;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Toast;
 import com.sanjeethdev.aquarim.databinding.ActivityMainBinding;
 import java.util.ArrayList;
@@ -65,7 +67,8 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
         // OnClickListener for main add button.
         binding.mainActionButton.setOnClickListener(view ->
         {
-            resultLauncher.launch(new Intent(this, AddRecordPopUp.class));
+            resultLauncher.launch(new Intent(this, AddRecordPopUp.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP));
             overridePendingTransition(R.anim.slide_in_from_bottom, R.anim.slide_out_to_bottom);
         });
 
@@ -87,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
         bundle.putLong("datetime", data.get(position).getDatetime());
         bundle.putInt("position", position);
         intent.putExtra("bundle", bundle);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         resultLauncher.launch(intent);
         overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
     }
@@ -102,7 +106,10 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
             sum += record.getQuantity();
         }
         // current / total * 100
-        binding.mainProgressBar.setProgress((int) ((sum/total)*100), true);
+        ObjectAnimator progressObjectAnimator = ObjectAnimator.ofInt(binding.mainProgressBar, "progress", (int) ((sum/total)*10000));
+        progressObjectAnimator.setInterpolator(new DecelerateInterpolator());
+        progressObjectAnimator.setDuration(750);
+        progressObjectAnimator.start();
     }
 
     // Gets records from databases and sets it to adapter to display.
