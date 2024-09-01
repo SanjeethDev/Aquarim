@@ -8,8 +8,8 @@
                 <corners
                     />
                 <gradient
-                    android:startColor="#8CE7DF"
-                    android:endColor="#56B0D3"
+                    android:startColor="@color/water_top"
+                    android:endColor="@color/water_bottom"
                     android:angle="-90" />
             </shape>
         </scale>
