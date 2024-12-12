@@ -4,60 +4,105 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="12dp"
-    android:background="@drawable/gradient_background_rounded"
+    android:layout_height="match_parent"
+    android:paddingBottom="5dp"
     tools:context=".AddRecordPopUp">
 
-    <EditText
-        android:id="@+id/add_liquid_name"
-        android:layout_width="0dp"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/dialog_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="@color/white"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="Liquid Name"
-        android:autofillHints="none"
-        style="@style/FancyEditable"
-        app:layout_constraintVertical_bias="0"
+        android:padding="12dp"
+        android:background="@drawable/gradient_background_rounded"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/add_liquid_quantity"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-
-    <EditText
-        android:id="@+id/add_liquid_quantity"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginStart="6dp"
-        android:textColor="@color/white"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:hint="Quantity (ml)"
-        android:autofillHints="none"
-        style="@style/FancyEditable"
-        app:layout_constraintStart_toEndOf="@id/add_liquid_name"
-        app:layout_constraintTop_toTopOf="@id/add_liquid_name"
-        app:layout_constraintBottom_toBottomOf="@id/add_liquid_name"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintVertical_bias="0">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/add_liquid"
-        android:layout_width="wrap_content"
-        android:layout_height="52dp"
-        android:layout_marginTop="10dp"
-        android:focusable="true"
-        android:text="Add"
-        android:enabled="false"
-        style="@style/FancyButtons"
-        app:layout_constraintTop_toBottomOf="@id/add_liquid_name"
-        app:layout_constraintStart_toStartOf="@id/add_liquid_name"
-        app:layout_constraintEnd_toEndOf="@id/add_liquid_quantity"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            style="@style/FancyTextsNormal"
+            android:text="@string/add_an_entry"
+            android:gravity="center"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/add_liquid_name"
+            app:layout_constraintStart_toStartOf="@id/add_liquid_name"
+            app:layout_constraintEnd_toEndOf="@id/back"
+            app:layout_constraintHorizontal_bias="0.5"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/back"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:focusable="true"
+            android:enabled="true"
+            android:rotation="45"
+            android:elevation="3dp"
+            android:background="@drawable/ic_add_circle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintHorizontal_bias="1"
+            />
+
+        <EditText
+            android:id="@+id/add_liquid_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/liquid_name"
+            android:autofillHints="none"
+            style="@style/FancyEditable"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintTop_toBottomOf="@id/back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/add_liquid_quantity"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <EditText
+            android:id="@+id/add_liquid_quantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="6dp"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:hint="@string/quantity_ml"
+            android:autofillHints="none"
+            style="@style/FancyEditable"
+            app:layout_constraintStart_toEndOf="@id/add_liquid_name"
+            app:layout_constraintTop_toTopOf="@id/add_liquid_name"
+            app:layout_constraintBottom_toBottomOf="@id/add_liquid_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_liquid"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_marginTop="10dp"
+            android:focusable="true"
+            android:text="@string/add"
+            android:enabled="false"
+            style="@style/FancyButtons"
+            app:layout_constraintTop_toBottomOf="@id/add_liquid_name"
+            app:layout_constraintStart_toStartOf="@id/add_liquid_name"
+            app:layout_constraintEnd_toEndOf="@id/add_liquid_quantity"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
