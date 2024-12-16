@@ -32,7 +32,7 @@ public class RecordItemPopUp extends AppCompatActivity
                 // Call delete record function and check the result.
                 if (recordDbHelper.deleteRecord(bundle.getLong("datetime")))
                 {
-                    Toast.makeText(this, "Successful deleted.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Removed", Toast.LENGTH_SHORT).show();
                     Intent output = new Intent(RecordItemPopUp.this, MainActivity.class);
                     output.putExtra("delete", bundle.getInt("position"));
                     setResult(RESULT_OK, output);
