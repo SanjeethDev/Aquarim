@@ -3,4 +3,10 @@
     <string name="itemview_dateformat">HH:MM:SS MONTH DAY YEAR</string>
     <string name="itemview_quantityformat">000 ml</string>
     <string name="itemview_liquidname">Water</string>
+    <string name="no_entries">No entries\nlogged today</string>
+    <string name="tap_to_add">Tap \' + \' to add entries</string>
+    <string name="liquid_name">Liquid Name</string>
+    <string name="quantity_ml">Quantity (ml)</string>
+    <string name="add">Add</string>
+    <string name="add_an_entry">Add an entry</string>
 </resources>
