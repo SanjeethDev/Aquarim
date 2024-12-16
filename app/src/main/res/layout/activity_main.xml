@@ -32,16 +32,62 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_progress_bar_text_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-24dp"
+        android:elevation="3dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@id/main_liquid_level"
+        app:layout_constraintTop_toTopOf="@id/main_liquid_level"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0.875">
+
+        <TextView
+            android:id="@+id/main_progress_bar_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:foregroundGravity="center"
+            style="@style/FancyHints"
+            android:gravity="fill|center_vertical"
+            android:maxLines="3"
+            android:padding="12dp"
+            android:rotation="0"
+            android:text="@string/no_entries"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/main_action_button"
         android:layout_width="52dp"
         android:layout_height="52dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="0dp"
         android:focusable="true"
-        android:background="@drawable/ic_add_circle"
+        android:background="@drawable/add_record_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
+
+    <View
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/ic_add_circle"
+        android:elevation="3dp"
+        app:layout_constraintBottom_toBottomOf="@id/main_action_button"
+        app:layout_constraintEnd_toEndOf="@id/main_action_button"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/main_action_button"
+        app:layout_constraintTop_toTopOf="@id/main_action_button"
+        app:layout_constraintVertical_bias="1.0"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_record_view"
@@ -49,31 +95,45 @@
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
         android:background="@drawable/record_background"
-        app:layout_constraintStart_toEndOf="@id/main_liquid_level"
         app:layout_constraintBottom_toBottomOf="@id/main_liquid_level"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/main_liquid_level"/>
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/main_liquid_level"
+        app:layout_constraintTop_toTopOf="@id/main_liquid_level"
+        app:layout_constraintVertical_bias="1.0"
+        />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:text=""
-        android:enabled="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/main_action_button"
-        app:layout_constraintTop_toBottomOf="@id/main_record_view"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+    <TextView
+        android:id="@+id/main_record_view_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tap_to_add"
+        app:layout_constraintBottom_toBottomOf="@id/main_record_view"
+        app:layout_constraintEnd_toEndOf="@id/main_record_view"
+        app:layout_constraintStart_toStartOf="@id/main_record_view"
+        app:layout_constraintTop_toTopOf="@id/main_record_view"
+        />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:text=""
-        android:enabled="false"
-        app:layout_constraintTop_toBottomOf="@id/main_record_view"
-        app:layout_constraintStart_toEndOf="@id/main_action_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+<!--    <Button-->
+<!--        android:id="@+id/button"-->
+<!--        android:layout_width="52dp"-->
+<!--        android:layout_height="52dp"-->
+<!--        android:text=""-->
+<!--        android:enabled="false"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/main_action_button"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/main_record_view"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/button2"-->
+<!--        android:layout_width="52dp"-->
+<!--        android:layout_height="52dp"-->
+<!--        android:text=""-->
+<!--        android:enabled="false"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/main_record_view"-->
+<!--        app:layout_constraintStart_toEndOf="@id/main_action_button"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
