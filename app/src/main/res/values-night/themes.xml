@@ -1,7 +1,8 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.Aquarim" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:statusBarColor">#293241</item>
+        <item name="android:statusBarColor">@color/background_gradient_light</item>
+        <item name="android:navigationBarColor">@color/background_gradient_dark</item>
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
@@ -10,6 +11,7 @@
     <style name="FancyEditable">
         <item name="android:background">@drawable/editable_background</item>
         <item name="android:textColorHint">@color/hint_grey</item>
+        <item name="android:textColor">@color/text</item>
         <item name="android:paddingStart">6dp</item>
         <item name="android:paddingEnd">6dp</item>
         <item name="android:paddingTop">12dp</item>
@@ -27,7 +29,15 @@
     </style>
     
     <style name="FancyButtons">
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/background_gradient_dark</item>
         <item name="android:background">@drawable/button_background</item>
+    </style>
+
+    <style name="FancyTextsNormal">
+        <item name="android:textColor">@color/text</item>
+    </style>
+
+    <style name="BottomLeftArrow">
+        <item name="android:background">@mipmap/bottom_left_arrow_dark_foreground</item>
     </style>
 </resources>
