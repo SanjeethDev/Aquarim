@@ -6,8 +6,8 @@ public class EpochHandler
 {
     // {HOUR, MIN, SECS, MILLISECS}
     // Defaults
-    private int[] dayStartingTime = {0,0,0,0};
-    private int[] dayEndingTime = {23,59,59,999};
+    private final int[] dayStartingTime = {0,0,0,0};
+    private final int[] dayEndingTime = {23,59,59,999};
 
     // Empty Constructor
     public EpochHandler() {}
