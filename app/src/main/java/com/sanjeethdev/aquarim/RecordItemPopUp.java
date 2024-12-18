@@ -6,6 +6,10 @@ import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.sanjeethdev.aquarim.databinding.ActivityRecordItemPopUpBinding;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 public class RecordItemPopUp extends AppCompatActivity
@@ -23,7 +27,9 @@ public class RecordItemPopUp extends AppCompatActivity
         assert bundle != null;
         binding.liquidRecordItemLiquid.setText(bundle.getString("liquid"));
         binding.liquidRecordItemQuantity.setText(String.valueOf(bundle.getDouble("quantity")));
-        binding.liquidRecordItemDatetime.setText(String.valueOf(bundle.getLong("datetime")));
+        Date date = new Date(bundle.getLong("datetime"));
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss", Locale.US);
+        binding.liquidRecordItemDatetime.setText(simpleDateFormat.format(date));
 
         binding.recordPopupDelete.setOnClickListener(view ->
         {
