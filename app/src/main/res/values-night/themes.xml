@@ -30,14 +30,11 @@
     
     <style name="FancyButtons">
         <item name="android:textColor">@color/background_gradient_dark</item>
-        <item name="android:background">@drawable/button_background</item>
+        <item name="android:background">@drawable/button_state</item>
     </style>
 
     <style name="FancyTextsNormal">
         <item name="android:textColor">@color/text</item>
     </style>
 
-    <style name="BottomLeftArrow">
-        <item name="android:background">@mipmap/bottom_left_arrow_dark_foreground</item>
-    </style>
 </resources>

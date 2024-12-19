@@ -30,9 +30,9 @@
         <item name="android:textColorHint">@color/hint_grey</item>
     </style>
 
-    <style name="FancyButtons" >
+    <style name="FancyButtons">
         <item name="android:textColor">@color/background_gradient_dark</item>
-        <item name="android:background">@drawable/button_background</item>
+        <item name="android:background">@drawable/button_state</item>
     </style>
     
     <style name="FancyTextsNormal">
@@ -42,10 +42,6 @@
     <style name="FancyHints">
         <item name="android:textColor">@color/text</item>
         <item name="android:background">@drawable/hint_bubble</item>
-    </style>
-
-    <style name="BottomLeftArrow">
-        <item name="android:background">@mipmap/bottom_left_arrow_light_foreground</item>
     </style>
 
 </resources>
