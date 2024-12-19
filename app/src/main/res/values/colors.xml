@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="text">@color/black</color>
     <color name="transparent">#00000000</color>
     <color name="text_background">#FFFFFFFF</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="hint_grey">#4D4D4D</color>
+    <color name="secondary">#8EBBFF</color>
+
     <color name="item_background_blue">#8DADDE</color>
-    <color name="highlight_blue">#182842</color>
-    <color name="background_gradient_dark">#9CC1FA</color>
-    <color name="background_gradient_light">#CFE2FF</color>
+    <color name="background_gradient_dark">#BAD6FF</color>
+    <color name="background_gradient_light">#B9D5FE</color>
+
+    <color name="water_top">#65AFFF</color>
+    <color name="water_bottom">#65AFFF</color>
+
+    <color name="hint_bottom">#59FFFFFF</color>
+
+    <color name="button_top">#72000C3A</color>
+    <color name="button_bottom">#FF24293D</color>
 </resources>
