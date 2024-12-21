@@ -72,14 +72,15 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
             overridePendingTransition(R.anim.slide_in_from_bottom, R.anim.slide_out_to_bottom);
         });
 
-        // Any view that has top clip its children.
+        // This applies the rounded effect for the record view and water level
+        // anything inside the container gets clipped
         binding.mainRecordView.setOutlineProvider(ViewOutlineProvider.BACKGROUND);
         binding.mainRecordView.setClipToOutline(true);
         binding.mainLiquidLevel.setOutlineProvider(ViewOutlineProvider.BACKGROUND);
         binding.mainLiquidLevel.setClipToOutline(true);
     }
 
-    // Item click interface implementation for record view.
+    // Each item in the list of record view get put in a editable popup box
     @Override
     public void onItemClick(int position)
     {
@@ -104,6 +105,15 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
         for (LiquidRecordModel record: data)
         {
             sum += record.getQuantity();
+        }
+
+        if (sum == 0)
+        {
+            binding.mainRecordViewText.setVisibility(View.VISIBLE);
+            binding.mainProgressBarTextContainer.setVisibility(View.VISIBLE);
+        } else {
+            binding.mainRecordViewText.setVisibility(View.GONE);
+            binding.mainProgressBarTextContainer.setVisibility(View.GONE);
         }
         // current / total * 100
         ObjectAnimator progressObjectAnimator = ObjectAnimator.ofInt(binding.mainProgressBar, "progress", (int) ((sum/total)*10000));
