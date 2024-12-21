@@ -33,10 +33,11 @@ public class LiquidRecordAdapter extends RecyclerView.Adapter<LiquidRecordAdapte
     @Override
     public void onBindViewHolder(@NonNull LiquidRecordAdapter.ViewHolder holder, int position)
     {
-        //Tue 09:00 April 25, 2024
+        // converts long date format to readable - Tue 09:00 April 25, 2024
         Date date = new Date(localData.get(position).getDatetime());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss", Locale.US);
         holder.datetime.setText(simpleDateFormat.format(date));
+
         String quantity = String.valueOf(localData.get(position).getQuantity()).replace(".0", "");
         holder.quantity.setText(quantity);
         holder.liquid.setText(localData.get(position).getLiquid());
