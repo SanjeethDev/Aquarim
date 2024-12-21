@@ -9,4 +9,6 @@
     <string name="quantity_ml">Quantity (ml)</string>
     <string name="add">Add</string>
     <string name="add_an_entry">Add an entry</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
 </resources>
