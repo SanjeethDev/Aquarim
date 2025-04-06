@@ -1,8 +1,8 @@
-package com.sanjeethdev.aquarim;
+package com.sanjeethdev.aquarim.Models;
 
 import java.util.Calendar;
 
-public class EpochHandler
+public class EpochTime
 {
     // {HOUR, MIN, SECS, MILLISECS}
     // Defaults
@@ -10,9 +10,9 @@ public class EpochHandler
     private final int[] dayEndingTime = {23,59,59,999};
 
     // Empty Constructor
-    public EpochHandler() {}
+    public EpochTime() {}
 
-    public long todayStart()
+    public long todayStartInMillis()
     {
         Calendar todayStart = Calendar.getInstance();
         todayStart.set(Calendar.HOUR_OF_DAY,dayStartingTime[0]);
@@ -22,7 +22,7 @@ public class EpochHandler
         return todayStart.getTimeInMillis();
     }
 
-    public long todayEnd()
+    public long todayEndInMillis()
     {
         Calendar todayEnd = Calendar.getInstance();
         todayEnd.set(Calendar.HOUR_OF_DAY,dayEndingTime[0]);

@@ -1,9 +1,11 @@
 package com.sanjeethdev.aquarim;
 
+import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
@@ -14,7 +16,12 @@ import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Toast;
+
+import com.sanjeethdev.aquarim.Adapters.LiquidRecordAdapter;
+import com.sanjeethdev.aquarim.Interfaces.RecordItemInterface;
+import com.sanjeethdev.aquarim.Models.LiquidRecordModel;
 import com.sanjeethdev.aquarim.databinding.ActivityMainBinding;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements RecordItemInterface
@@ -22,34 +29,19 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
     private ActivityMainBinding binding;
     private LiquidRecordAdapter liquidRecordAdapter;
     private ArrayList<LiquidRecordModel> data;
+
+    // Updates the UI after any record updates
     private final ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
-    activityResult ->
-    {
-        if (activityResult.getResultCode() == Activity.RESULT_OK)
-        {
-            if (activityResult.getData() != null)
+            activityResult ->
             {
-                if (activityResult.getData().hasExtra("delete"))
+                if (!(activityResult.getResultCode() == Activity.RESULT_OK))
                 {
-                    int position = activityResult.getData().getIntExtra("delete", -1);
-                    if (position >= 0)
-                    {
-                        liquidRecordAdapter.notifyItemRemoved(position);
-                        data.remove(position);
-                    }
-                } else if (activityResult.getData().hasExtra("insert"))
-                {
-                    data.add(0, (LiquidRecordModel) activityResult.getData().getSerializableExtra("insert"));
-                    liquidRecordAdapter.notifyItemInserted(0);
-                    binding.mainRecordView.scrollToPosition(0);
-                } else
-                {
-                    Log.d("DEBUG", "function not found.");
+                    Log.d("DEBUG", "activityResult: " + activityResult.getResultCode());
+                    return;
                 }
-            }
-        }
-    });
+                editRecordList(activityResult);
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -61,11 +53,14 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
         setContentView(viewBinding);
 
         // Get values
+        data = new ArrayList<>();
+        liquidRecordAdapter = new LiquidRecordAdapter(data, this);
+        binding.mainRecordView.setAdapter(liquidRecordAdapter);
         getRecords();
         goalPercentage();
 
         // OnClickListener for main add button.
-        binding.mainActionButton.setOnClickListener(view ->
+        binding.mainAddButton.setOnClickListener(view ->
         {
             resultLauncher.launch(new Intent(this, AddRecordPopUp.class)
                     .setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -78,6 +73,13 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
         binding.mainRecordView.setClipToOutline(true);
         binding.mainLiquidLevel.setOutlineProvider(ViewOutlineProvider.BACKGROUND);
         binding.mainLiquidLevel.setClipToOutline(true);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        goalPercentage();
     }
 
     // Each item in the list of record view get put in a editable popup box
@@ -99,10 +101,10 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
     // Calculate the percentage of the daily goal based on today's records.
     public void goalPercentage()
     {
-        int weight = 55;
+        int weight = 55; // hardcoded for now
         int total = weight * 35;
         double sum = 0;
-        for (LiquidRecordModel record: data)
+        for (LiquidRecordModel record : data)
         {
             sum += record.getQuantity();
         }
@@ -111,12 +113,13 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
         {
             binding.mainRecordViewText.setVisibility(View.VISIBLE);
             binding.mainProgressBarTextContainer.setVisibility(View.VISIBLE);
-        } else {
+        } else
+        {
             binding.mainRecordViewText.setVisibility(View.GONE);
             binding.mainProgressBarTextContainer.setVisibility(View.GONE);
         }
         // current / total * 100
-        ObjectAnimator progressObjectAnimator = ObjectAnimator.ofInt(binding.mainProgressBar, "progress", (int) ((sum/total)*10000));
+        ObjectAnimator progressObjectAnimator = ObjectAnimator.ofInt(binding.mainProgressBar, "progress", (int) ((sum / total) * 10000));
         progressObjectAnimator.setInterpolator(new DecelerateInterpolator());
         progressObjectAnimator.setDuration(750);
         progressObjectAnimator.start();
@@ -126,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
     private void getRecords()
     {
         // Test code to look at the data and views.
-        data = new ArrayList<>();
         binding.mainRecordView.setLayoutManager(new LinearLayoutManager(this));
         Cursor cursor;
         try (LiquidRecordDbHelper liquidRecordDbHelper = new LiquidRecordDbHelper(this))
@@ -136,30 +138,67 @@ public class MainActivity extends AppCompatActivity implements RecordItemInterfa
             if (cursor.getCount() == 0)
             {
                 Toast.makeText(this, "Empty History", Toast.LENGTH_SHORT).show();
-            } else
+                return;
+            }
+
+            if (cursor.moveToFirst())
             {
-                if (cursor.moveToFirst())
+                do
                 {
-                    do
-                    {
-                        data.add(new LiquidRecordModel(
-                                cursor.getLong(1),
-                                cursor.getDouble(3),
-                                cursor.getString(2)));
-                    } while (cursor.moveToNext());
-                }
+                    data.add(new LiquidRecordModel(
+                            cursor.getLong(1),
+                            cursor.getDouble(3),
+                            cursor.getString(2)));
+                } while (cursor.moveToNext());
             }
             cursor.close();
+        } catch (Exception exception)
+        {
+            Log.d("DEBUG", "getRecords: exception" + exception.getLocalizedMessage());
         }
-        // Set adapter for the recycler view (after the data has been populated).
-        liquidRecordAdapter = new LiquidRecordAdapter(data, this);
-        binding.mainRecordView.setAdapter(liquidRecordAdapter);
     }
 
-    @Override
-    protected void onResume()
+    // Changes the record list items based on the operation
+    private void editRecordList(ActivityResult activityResult)
     {
-        super.onResume();
-        goalPercentage();
+        if (activityResult.getData() == null)
+        {
+            Log.d("DEBUG", "changeRecordList: result " + null);
+            return;
+        }
+
+        String action;
+        if (activityResult.getData().hasExtra("delete"))
+        {
+            action = "delete";
+        } else if (activityResult.getData().hasExtra("insert"))
+        {
+            action = "insert";
+        } else
+        {
+            action = "not defined";
+        }
+
+        switch (action)
+        {
+            case "delete":
+                int position = activityResult.getData().getIntExtra("delete", -1);
+                if (position >= 0)
+                {
+                    liquidRecordAdapter.notifyItemRemoved(position);
+                    data.remove(position);
+                }
+                break;
+
+            case "insert":
+                data.add(0, (LiquidRecordModel) activityResult.getData().getSerializableExtra("insert"));
+                liquidRecordAdapter.notifyItemInserted(0);
+                binding.mainRecordView.scrollToPosition(0);
+                break;
+
+            default:
+                Log.d("DEBUG", "function not found.");
+                break;
+        }
     }
 }

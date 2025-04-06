@@ -1,4 +1,4 @@
-package com.sanjeethdev.aquarim;
+package com.sanjeethdev.aquarim.Models;
 
 import java.io.Serializable;
 

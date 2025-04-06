@@ -1,4 +1,4 @@
-package com.sanjeethdev.aquarim;
+package com.sanjeethdev.aquarim.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.sanjeethdev.aquarim.Models.LiquidRecordModel;
+import com.sanjeethdev.aquarim.R;
+import com.sanjeethdev.aquarim.Interfaces.RecordItemInterface;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;

@@ -11,4 +11,5 @@
     <string name="add_an_entry">Add an entry</string>
     <string name="delete">Delete</string>
     <string name="save">Save</string>
+    <string name="edit">Edit</string>
 </resources>

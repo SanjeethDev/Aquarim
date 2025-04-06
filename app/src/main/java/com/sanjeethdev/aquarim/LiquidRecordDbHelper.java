@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.sanjeethdev.aquarim.Models.EpochTime;
+
 public class LiquidRecordDbHelper extends SQLiteOpenHelper
 {
     private static final String SQL_CREATE_ENTRIES = "CREATE TABLE "
@@ -62,12 +64,12 @@ public class LiquidRecordDbHelper extends SQLiteOpenHelper
     public Cursor todayRecords()
     {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        EpochHandler epochHandler = new EpochHandler();
+        EpochTime epochTime = new EpochTime();
         return sqLiteDatabase.rawQuery("SELECT * FROM "
                 + TABLE_NAME
                 + " WHERE " + COLUMN_NAME_DATE
-                + " BETWEEN " + epochHandler.todayStart()
-                + " AND " + epochHandler.todayEnd()
+                + " BETWEEN " + epochTime.todayStartInMillis()
+                + " AND " + epochTime.todayEndInMillis()
                 + " ORDER BY "
                 + COLUMN_NAME_DATE
                 + " DESC", null);

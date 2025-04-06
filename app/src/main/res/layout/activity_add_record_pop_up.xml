@@ -22,33 +22,34 @@
         app:layout_constraintVertical_bias="0">
 
         <TextView
+            style="@style/FancyTextsNormal"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            style="@style/FancyTextsNormal"
-            android:text="@string/add_an_entry"
             android:gravity="center"
+            android:text="@string/add_an_entry"
             android:textSize="18sp"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/add_liquid_name"
-            app:layout_constraintStart_toStartOf="@id/add_liquid_name"
             app:layout_constraintEnd_toEndOf="@id/back"
             app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/add_liquid_name"
+            app:layout_constraintTop_toTopOf="parent"
             />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/back"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:focusable="true"
-            android:enabled="true"
-            android:rotation="45"
-            android:elevation="3dp"
             android:background="@drawable/ic_add_circle"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:elevation="3dp"
+            android:enabled="true"
+            android:focusable="true"
+            android:rotation="45"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0"
             />
 
         <EditText

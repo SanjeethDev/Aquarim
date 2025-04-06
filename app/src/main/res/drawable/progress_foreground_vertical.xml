@@ -3,14 +3,15 @@
     <item android:id="@android:id/progress">
         <scale
             android:scaleHeight="100%"
-            android:scaleGravity="bottom">
+            android:scaleGravity="bottom"
+            >
             <shape>
-                <corners
-                    />
+                <corners/>
                 <gradient
                     android:startColor="@color/water_top"
                     android:endColor="@color/water_bottom"
-                    android:angle="-90" />
+                    android:angle="-90"
+                    />
             </shape>
         </scale>
     </item>

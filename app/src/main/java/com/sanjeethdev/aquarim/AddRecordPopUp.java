@@ -7,6 +7,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.sanjeethdev.aquarim.Models.LiquidRecordModel;
 import com.sanjeethdev.aquarim.databinding.ActivityAddRecordPopUpBinding;
 import java.util.Date;
 
